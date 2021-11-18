@@ -2,6 +2,7 @@
 
 An implementation of Scheme and SchemeQL query language.
 
+Paper: https://soliloq.uy/~jahan/pdf/SchemeUnit%20and%20SchemeQL.pdf
 
 ## Building
 
