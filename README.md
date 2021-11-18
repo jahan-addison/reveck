@@ -15,6 +15,6 @@ Example:
 > mkdir build && cd build
 > cmake .. -DCMAKE_BUILD_TYPE=[Debug | Coverage | Release]
 > make
-> ./main
+> ./repl
 > make test      # Makes and runs the tests.
 ```
