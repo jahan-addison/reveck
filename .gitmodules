@@ -1,3 +1,6 @@
 [submodule "external/doctest"]
 	path = external/doctest
 	url = https://github.com/onqtam/doctest.git
+[submodule "external/lexy"]
+	path = external/lexy
+	url = git@github.com:foonathan/lexy.git

@@ -5,16 +5,17 @@ project(reveck VERSION 0.0.1.0 LANGUAGES CXX)
 option(ENABLE_WARNINGS_SETTINGS "Allow target_set_warnings to add flags and defines.
                                  Set this to OFF if you want to provide your own warning parameters." ON)
 option(ENABLE_DOCTESTS "Include tests in the library. Setting this to OFF will remove all doctest related code.
-                        Tests in tests/*.cpp will still be enabled." ON)
+                        Tests in tests/*.cc will still be enabled." ON)
 
 
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/")
 
 include(Warnings)
+include(CTest)
 include(Doctest)
 
 set(SOURCES
-    src/repl/repl.cc
+    src/repl/lib.cc
 )
 set(TESTFILES
     tests/main.cc
@@ -23,6 +24,8 @@ set(TESTFILES
 set(LIBRARY_NAME reveck)
 
 add_library(${LIBRARY_NAME} OBJECT ${SOURCES})
+
+target_include_directories(${LIBRARY_NAME} PUBLIC ${PROJECT_SOURCE_DIR}/include)
 
 target_link_libraries(${LIBRARY_NAME} PUBLIC doctest)
 
