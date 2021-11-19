@@ -1,4 +1,5 @@
 {
-  "editor.fontFamily": " 'Droid Sans Mono', 'monospace', monospace, 'Droid Sans Fallback'",
-  "editor.fontSize": 16
+  "editor.fontFamily": " 'Hasklig', 'Droid Sans Mono', 'monospace', monospace, 'Droid Sans Fallback'",
+  "cmake.configureOnOpen": false,
+  "editor.tabSize": 3
 }
