@@ -2,9 +2,8 @@
 
 An implementation of Scheme and SchemeQL query language.
 
-R5RS Specification: https://schemers.org/Documents/Standards/R5RS/r5rs.pdf
-
-Paper: https://soliloq.uy/~jahan/pdf/SchemeUnit%20and%20SchemeQL.pdf
+* SchemaQL Paper: https://soliloq.uy/~jahan/pdf/SchemeUnit%20and%20SchemeQL.pdf
+* R5RS Specification: https://schemers.org/Documents/Standards/R5RS/r5rs.pdf
 
 ## Building
 
