@@ -37,7 +37,7 @@ private:
 };
 
 /**
- * @brief character ast node
+ * @brief letter ast node
  */
 struct letter : public node
 {
@@ -50,6 +50,9 @@ private:
     unsigned char char_;
 };
 
+/**
+ * @brief digit ast node
+ */
 struct digit : public node
 {
     explicit digit(uint8_t d) : digit_(d) {}
