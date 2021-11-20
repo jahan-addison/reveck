@@ -21,7 +21,7 @@ concept Derived = std::is_base_of<U, T>::value;
 template<Derived<node> T>
 struct datum : public node
 {
-    explicit datum(T data) : data_(data) {};
+    explicit datum(T& data) : data_(data) {};
 
     void print() const override
     {
@@ -108,20 +108,6 @@ struct number : public node
 private:
     int16_t num_;
 };
-
-template<Derived<node> T>
-struct datum : public node
-{
-    explicit datum(T data) : data_(data) {};
-
-    void print() const override
-    {
-        data_.print();
-    }
-private:
-    T data_;
-};
-
 
 template<Derived<node> T>
 struct vector : public node
