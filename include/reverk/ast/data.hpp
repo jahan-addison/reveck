@@ -1,6 +1,12 @@
 #pragma once
 
+#include <list>
+#include <vector>
+#include <string>
+#include <variant>
+
 #include <reverk/ast/node.hpp>
+#include <reverk/ast/identifiers.hpp>
 
 namespace reverk
 {
@@ -8,6 +14,28 @@ namespace scheme
 {
 namespace ast
 {
+
+template <class T, class U>
+concept Derived = std::is_base_of<U, T>::value;
+
+template<Derived<node> T>
+struct datum : public node
+{
+    explicit datum(T data) : data_(data) {};
+
+    void print() const override
+    {
+        data_.print();
+    }
+private:
+    T data_;
+};
+
+/**
+ * @brief symbol ast node
+ */
+struct symbol : public identifier {};
+
 /**
  * @brief boolean ast node
  */
@@ -47,6 +75,10 @@ private:
     unsigned char char_;
 };
 
+/**
+ * @brief string character ast node
+ */
+struct strchr : public character {};
 
 /**
  * @brief string ast node
@@ -76,6 +108,34 @@ struct number : public node
 private:
     int16_t num_;
 };
+
+template<Derived<node> T>
+struct datum : public node
+{
+    explicit datum(T data) : data_(data) {};
+
+    void print() const override
+    {
+        data_.print();
+    }
+private:
+    T data_;
+};
+
+
+template<Derived<node> T>
+struct vector : public node
+{
+    explicit vector(std::vector<datum<T>> v) : vector_(std::move(v)) {};
+    void print() const override
+    {
+        for (auto const& j : vector_)
+            j.print();
+    }
+private:
+    std::vector<datum<T>> vector_;
+};
+
 
 } // namespace ast
 } // namespace scheme
