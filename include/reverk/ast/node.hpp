@@ -5,8 +5,6 @@
 
 namespace reverk
 {
-namespace scheme
-{
 namespace ast
 {
 
@@ -24,5 +22,4 @@ protected:
 };
 
 } // namespace ast
-} // namespace scheme
 } // namespace reverk

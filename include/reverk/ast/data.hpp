@@ -6,11 +6,9 @@
 #include <variant>
 
 #include <reverk/ast/node.hpp>
-#include <reverk/ast/identifiers.hpp>
+#include <reverk/ast/identifier.hpp>
 
 namespace reverk
-{
-namespace scheme
 {
 namespace ast
 {
@@ -34,7 +32,7 @@ private:
 /**
  * @brief symbol ast node
  */
-struct symbol : public identifier {};
+struct symbol : public ast::identifier {};
 
 /**
  * @brief boolean ast node
@@ -94,21 +92,6 @@ private:
     std::string_view text_;
 };
 
-
-/**
- * @brief number ast node
- */
-struct number : public node
-{
-    explicit number(int16_t num) : num_(num) {}
-    void print() const override
-    {
-        std::printf("%d", num_);
-    }
-private:
-    int16_t num_;
-};
-
 template<Derived<node> T>
 struct vector : public node
 {
@@ -122,7 +105,5 @@ private:
     std::vector<datum<T>> vector_;
 };
 
-
 } // namespace ast
-} // namespace scheme
 } // namespace reverk

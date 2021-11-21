@@ -4,12 +4,9 @@
 
 namespace reverk
 {
-namespace scheme
-{
 namespace ast
 {
 
 
 } // namespace ast
-} // namespace scheme
 } // namespace reverk

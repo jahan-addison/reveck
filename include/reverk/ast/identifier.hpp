@@ -7,8 +7,6 @@
 
 namespace reverk
 {
-namespace scheme
-{
 namespace ast
 {
 
@@ -67,5 +65,4 @@ private:
 };
 
 } // namespace ast
-} // namespace scheme
 } // namespace reverk
