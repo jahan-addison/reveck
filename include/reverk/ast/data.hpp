@@ -1,11 +1,12 @@
 #pragma once
 
 #include <list>
+#include <variant>
 #include <vector>
 #include <string>
-#include <variant>
 
 #include <reverk/ast/node.hpp>
+#include <reverk/ast/number.hpp>
 #include <reverk/ast/identifier.hpp>
 
 namespace reverk
@@ -13,21 +14,7 @@ namespace reverk
 namespace ast
 {
 
-template <class T, class U>
-concept Derived = std::is_base_of<U, T>::value;
-
-template<Derived<node> T>
-struct datum : public node
-{
-    explicit datum(T& data) : data_(data) {};
-
-    void print() const override
-    {
-        data_.print();
-    }
-private:
-    T data_;
-};
+template<class... Ts> struct overload : Ts... { using Ts::operator()...; };
 
 /**
  * @brief symbol ast node
@@ -74,11 +61,6 @@ private:
 };
 
 /**
- * @brief string character ast node
- */
-struct strchr : public character {};
-
-/**
  * @brief string ast node
  */
 struct string : public node
@@ -92,17 +74,44 @@ private:
     std::string_view text_;
 };
 
-template<Derived<node> T>
 struct vector : public node
 {
-    explicit vector(std::vector<datum<T>> v) : vector_(std::move(v)) {};
+    explicit vector(std::vector<datum> v) : vector_(std::move(v)) {};
     void print() const override
     {
         for (auto const& j : vector_)
             j.print();
     }
 private:
-    std::vector<datum<T>> vector_;
+    std::vector<datum> vector_;
+};
+
+struct list : public node
+{
+    explicit list(std::list<datum> v) : list_(std::move(v)) {};
+    void print() const override
+    {
+        for (auto const& j : list_)
+            j.print();
+    }
+private:
+    std::list<datum> list_;
+};
+
+/**
+ * @brief the sumtype of all node::data types
+ *
+ */
+struct datum : public node
+{
+    using datum_t = std::variant<boolean, number, character, string, symbol, list, vector>;
+    datum_t data;
+    void print() const override
+    {
+        std::visit(overload{
+            [](auto&& arg) { arg.print(); },
+            }, data);
+    }
 };
 
 } // namespace ast
